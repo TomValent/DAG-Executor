@@ -27,7 +27,11 @@ class Node:
 
 
     def run(self, inputs: dict[str, np.ndarray]) -> Any:
-        """Execute this node's action with the provided inputs."""
+        """
+        Execute this node's action with the provided inputs.
+
+        :param inputs: dict of inputs for this node.
+        """
 
         return self._action(inputs)
 
@@ -51,7 +55,11 @@ class Node:
 
 
     def remove_from_remaining_dependencies(self, node_name: str) -> None:
-        """Return a list of all dependencies for this node."""
+        """
+        Return a list of all dependencies for this node.
+
+        :param node_name: name of the dependency to remove.
+        """
 
         self._remaining_deps.remove(node_name)
 

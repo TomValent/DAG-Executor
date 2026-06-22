@@ -10,8 +10,12 @@ from errors.node_deps_error import NodeDependenciesError
 class Executor:
     """Class for executing DAG nodes in parallel using Kahn's algorithm."""
 
-    def __init__(self, dag):
-        """Executor constructor. Requires DAG object."""
+    def __init__(self, dag: DAG):
+        """
+        Executor constructor. Requires DAG object.
+
+        :param dag: The DAG object.
+        """
 
         self.dag = dag
 

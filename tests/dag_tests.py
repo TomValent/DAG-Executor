@@ -3,6 +3,7 @@ import numpy as np
 from dag_processor.DAG import DAG
 from dag_processor.executor import Executor
 from dag_processor.node import Node
+from errors.duplicate_node_error import DuplicateNodeError
 from errors.node_deps_error import NodeDependenciesError
 
 
@@ -184,3 +185,23 @@ def test_unmet_dependencies():
     except NodeDependenciesError as e:
         assert "node_b" in str(e)
         assert "missing_node" in str(e)
+
+
+def test_duplicate_nodes():
+    dag = DAG()
+
+    dag.add_node(Node(
+        name="node_a",
+        dependencies=[],
+        action=lambda inputs: np.array([1, 2, 3])
+    ))
+
+    try:
+        dag.add_node(Node(
+            name="node_a",
+            dependencies=[],
+            action=lambda inputs: np.array([1, 2, 3])
+        ))
+        assert False, "Expected DuplicateNodeError to be raised"
+    except DuplicateNodeError as e:
+        assert "node_a" in str(e)
